@@ -13,7 +13,7 @@ export const BASE_URL_API = `${BASE_URL}/api`;
 
 export default function Api(){
 
-    const token = "ABC.XYZ.ZXC"
+    const token = localStorage.getItem("access_token")
 
     const api = axios.create({
         baseURL: BASE_URL_API,
@@ -30,6 +30,38 @@ export default function Api(){
         (error) => {
             //error 401 (auth)
             if(error.response.status === 401){
+
+                localStorage.removeItem("access_token");
+                
+                location.href = "/auth/login"
+            }
+
+            return Promise.reject(error);
+        }
+    )
+
+    return api;
+}
+
+export function ApiAuth(){
+
+    const api = axios.create({
+        baseURL: BASE_URL_API,
+        headers: {
+            'Accept': 'application/json',
+        }
+    });
+
+    api.interceptors.response.use(
+        (response) => {
+            return response;
+        },
+        (error) => {
+            //error 401 (auth)
+            if(error.response.status === 401){
+
+                localStorage.removeItem("access_token");
+                
                 location.href = "/auth/login"
             }
 

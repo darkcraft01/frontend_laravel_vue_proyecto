@@ -1,4 +1,5 @@
 <template>
+    <!--
     <h1>App.vue</h1>
 
     <RouterLink to="/">INICIO</RouterLink> |
@@ -7,6 +8,7 @@
     <RouterLink to="/blog">Blog</RouterLink> |
     <RouterLink to="/auth/login">Ingresar</RouterLink>
     <br>
+    -->
 
     <RouterView />
     
